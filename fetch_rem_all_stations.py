@@ -134,4 +134,4 @@ def extract_full_status() -> dict:
         kwgt_titre = f"{STATION_FOCUS} : Ascenseur HS"
         kwgt_detail = focus["alertes"][0][:140]
     else:
-        kwgt_titre = f"{STATION_FOCUS}
+        kwgt_titre = f"{STATION_FOCUS} {statut_focus}"
