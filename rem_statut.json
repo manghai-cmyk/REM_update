@@ -1,0 +1,30 @@
+{
+  "kwgt": {
+    "station": "Canora",
+    "titre": "Canora : Service normal",
+    "detail": "RAS à Canora (1 alerte(s) ailleurs)",
+    "niveau": "normal",
+    "nb_stations_touchees": 1,
+    "mis_a_jour": "2026-11-24 14:32"
+  },
+  "alertes_globales": [],
+  "stations": {
+    "Brossard": {
+      "niveau": "normal",
+      "statut": "Service normal",
+      "alertes": []
+    },
+    "McGill": {
+      "niveau": "avertissement",
+      "statut": "Ascenseur HS",
+      "alertes": [
+        "Ascenseur 01 hors service — Station McGill"
+      ]
+    },
+    "Canora": {
+      "niveau": "normal",
+      "statut": "Service normal",
+      "alertes": []
+    }
+  }
+}
