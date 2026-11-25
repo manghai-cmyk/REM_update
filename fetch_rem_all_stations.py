@@ -7,7 +7,7 @@ from zoneinfo import ZoneInfo
 from playwright.sync_api import sync_playwright
 
 URL = "https://rem.info/fr/se-deplacer/etat-du-service"
-OUTPUT_PATH = Path("rem_status.json")
+OUTPUT_PATH = Path("rem_statut.json")
 STATION_FOCUS = "Canora"
 
 # Liste des stations du réseau REM
