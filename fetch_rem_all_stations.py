@@ -126,7 +126,6 @@ def extract_full_status() -> dict:
     autres_stations_alerte = [
         s for s, info in stations_data.items() if s != STATION_FOCUS and info["niveau"] != "normal"
     ]
-
     if focus["niveau"] == "alerte":
         kwgt_titre = f"{STATION_FOCUS} : Alerte"
         kwgt_detail = focus["alertes"][0][:140]
@@ -134,4 +133,30 @@ def extract_full_status() -> dict:
         kwgt_titre = f"{STATION_FOCUS} : Ascenseur HS"
         kwgt_detail = focus["alertes"][0][:140]
     else:
-        kwgt_titre = f"{STATION_FOCUS} {statut_focus}"
+        kwgt_titre = f"{STATION_FOCUS} : Service normal"
+
+    nb_autres = len(autres_stations_alerte)
+    if focus["niveau"] == "normal":
+        kwgt_detail = (
+            "RAS à Canora (service normal)"
+            if nb_autres == 0
+            else f"RAS à Canora ({nb_autres} alerte(s) ailleurs)"
+        )
+    elif not kwgt_detail:
+        kwgt_detail = "Alerte en cours à Canora"
+
+    payload = {
+        "kwgt": {
+            "station": STATION_FOCUS,
+            "titre": kwgt_titre,
+            "detail": kwgt_detail,
+            "niveau": focus["niveau"],
+            "nb_stations_touchees": nb_autres + (1 if focus["niveau"] != "normal" else 0),
+            "mis_a_jour": datetime.now(ZoneInfo("America/Toronto")).strftime("%Y-%m-%d %H:%M"),
+        },
+        "alertes_globales": alertes_globales,
+        "stations": stations_data,
+    }
+
+    OUTPUT_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    return payload
